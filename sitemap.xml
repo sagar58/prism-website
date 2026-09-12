@@ -1,18 +1,69 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<urlset
-      xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
-      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-      xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9
-            http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 
-<url>
-  <loc>https://www.13tabs.com/</loc>
-  <priority>1.00</priority>
-</url>
+    <!-- Homepage -->
+    <url>
+        <loc>https://www.13tabs.com/</loc>
+        <changefreq>monthly</changefreq>
+        <priority>1.0</priority>
+    </url>
 
-<!-- Additional URLs -->
+    <!-- Solutions -->
+    <url>
+        <loc>https://www.13tabs.com/solutions/government.html</loc>
+        <changefreq>monthly</changefreq>
+        <priority>0.8</priority>
+    </url>
 
-<!-- Subdomain URL -->
+    <url>
+        <loc>https://www.13tabs.com/solutions/media.html</loc>
+        <changefreq>monthly</changefreq>
+        <priority>0.8</priority>
+    </url>
 
+    <url>
+        <loc>https://www.13tabs.com/solutions/enterprise.html</loc>
+        <changefreq>monthly</changefreq>
+        <priority>0.8</priority>
+    </url>
+
+    <!-- Case Studies -->
+    <url>
+        <loc>https://www.13tabs.com/case-studies/karnataka-idtu.html</loc>
+        <changefreq>monthly</changefreq>
+        <priority>0.9</priority>
+    </url>
+
+    <url>
+        <loc>https://www.13tabs.com/case-studies/delhi-student-protest.html</loc>
+        <changefreq>monthly</changefreq>
+        <priority>0.9</priority>
+    </url>
+
+    <url>
+        <loc>https://www.13tabs.com/case-studies/jharkhand-information-environment.html</loc>
+        <changefreq>monthly</changefreq>
+        <priority>0.9</priority>
+    </url>
+
+    <!-- Contact -->
+    <url>
+        <loc>https://www.13tabs.com/contact.html</loc>
+        <changefreq>monthly</changefreq>
+        <priority>0.7</priority>
+    </url>
+
+    <!-- Legal -->
+    <url>
+        <loc>https://www.13tabs.com/privacy.html</loc>
+        <changefreq>yearly</changefreq>
+        <priority>0.3</priority>
+    </url>
+
+    <url>
+        <loc>https://www.13tabs.com/terms-of-use.html</loc>
+        <changefreq>yearly</changefreq>
+        <priority>0.3</priority>
+    </url>
 
 </urlset>
