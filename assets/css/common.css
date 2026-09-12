@@ -1,0 +1,778 @@
+/* =========================================================
+   PRISM — COMMON SITE CHROME
+   Shared by every public page.
+   Page-specific CSS should contain only page-specific styling.
+========================================================= */
+
+@font-face {
+    font-family: 'nasalization';
+    src: url(../fonts/nasalization-rg.otf);
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Syne';
+    src: url(../fonts/Syne.ttf);
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'IBM Plex Sans';
+    src: url(../fonts/IBMPlexSans.ttf);
+    font-display: swap;
+}
+
+:root {
+    --font-brand: 'nasalization', sans-serif;
+    --font-display: 'Syne', 'Poppins', sans-serif;
+    --font-body: 'IBM Plex Sans', 'Poppins', sans-serif;
+    --font-mono: 'IBM Plex Mono', ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+
+    --page: #F4F7FB;
+    --page-alt: #E4ECF5;
+    --white: #FFFFFF;
+
+    --navy: #09121C;
+    --navy-soft: #102235;
+    --accent: #1C5FA3;
+    --accent-bright: #2C7AC8;
+    --signal: #8A5008;
+    --teal: #197A72;
+
+    --text: #0B1929;
+    --text-secondary: #2C3E50;
+    --text-muted: #8496A8;
+
+    --border-card: rgba(28, 95, 163, .11);
+    --border-subtle: rgba(0, 0, 0, .08);
+
+    --container: 1280px;
+    --transition: .26s ease;
+    --header-height: 78px;
+}
+
+*,
+*::before {
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+    overflow-x: hidden;
+}
+
+body {
+    margin: 0;
+    color: var(--text);
+    font-family: var(--font-body);
+    font-size: 15px;
+    line-height: 1.65;
+    -webkit-font-smoothing: antialiased;
+    overflow-x: hidden;
+}
+
+img {
+    display: block;
+    max-width: 100%;
+}
+
+a {
+    color: inherit;
+    text-decoration: none;
+}
+
+button,
+input,
+select,
+textarea {
+    font: inherit;
+}
+
+button,
+a {
+    -webkit-tap-highlight-color: transparent;
+}
+
+.section-container {
+    width: min(var(--container), calc(100% - 48px));
+    margin-inline: auto;
+}
+
+
+/* =========================================================
+   HEADER
+========================================================= */
+
+.site-header,
+.page-header {
+    position: absolute;
+    inset: 0 0 auto;
+    z-index: 1000;
+    width: 100%;
+    color: #fff;
+    background: rgba(9, 18, 28, .97);
+    border-bottom: 1px solid rgba(255, 255, 255, .07);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+}
+
+.header-inner {
+    position: relative;
+    width: min(var(--container), calc(100% - 48px));
+    min-height: var(--header-height);
+    margin-inline: auto;
+    display: flex;
+    align-items: center;
+    gap: 28px;
+}
+
+.brand,
+.hero-brand {
+    display: inline-flex;
+    align-items: center;
+    gap: 9px;
+    flex: 0 0 auto;
+    text-decoration: none;
+}
+
+.brand-logo {
+    display: block;
+    width: auto;
+    height: 36px;
+}
+
+.brand-name,
+.brand-mark {
+    font-family: var(--font-brand);
+    font-size: 1.12rem;
+    font-weight: 700;
+    line-height: 1;
+    letter-spacing: .16em;
+    background: linear-gradient(90deg, #D4AF5A, #2C7AC8 48%, #5CC7B0);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.main-nav,
+.hero-nav {
+    margin-left: auto;
+    display: flex;
+    align-items: center;
+    gap: 28px;
+}
+
+.main-nav > a,
+.main-nav .nav-link,
+.hero-nav > a,
+.hero-nav .nav-link {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 9px 0;
+    border: 0;
+    background: transparent;
+    color: rgba(255, 255, 255, .64);
+    font-family: var(--font-mono);
+    font-size: .66rem;
+    font-weight: 500;
+    line-height: 1.2;
+    letter-spacing: .08em;
+    text-transform: uppercase;
+    text-decoration: none;
+    cursor: pointer;
+    transition: color var(--transition);
+}
+
+.main-nav > a:hover,
+.main-nav > a.active,
+.main-nav .nav-link:hover,
+.main-nav .nav-link.active,
+.hero-nav > a:hover,
+.hero-nav > a.active {
+    color: #fff;
+}
+
+.nav-dropdown {
+    position: relative;
+}
+
+.nav-chevron {
+    display: inline-block;
+    font-size: 12px;
+    line-height: 1;
+    color: rgba(255, 255, 255, .42);
+    transition: transform var(--transition);
+}
+
+.nav-dropdown.open .nav-chevron {
+    transform: rotate(180deg);
+}
+
+.dropdown-menu {
+    position: absolute;
+    top: calc(100% + 8px);
+    left: 50%;
+    min-width: 205px;
+    padding: 8px;
+    transform: translateX(-50%) translateY(-4px);
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+    background: #fff;
+    border: 1px solid var(--border-card);
+    border-radius: 10px;
+    box-shadow: 0 18px 45px rgba(11, 25, 41, .18);
+    transition: opacity var(--transition), transform var(--transition), visibility var(--transition);
+}
+
+.nav-dropdown:hover > .dropdown-menu,
+.nav-dropdown:focus-within > .dropdown-menu,
+.nav-dropdown.open > .dropdown-menu {
+    opacity: 1;
+    visibility: visible;
+    pointer-events: auto;
+    transform: translateX(-50%) translateY(0);
+}
+
+.dropdown-menu a {
+    display: block;
+    padding: 10px 12px;
+    border-radius: 6px;
+    color: #2C3E50;
+    font-family: var(--font-body);
+    font-size: .8rem;
+    line-height: 1.35;
+    white-space: nowrap;
+    text-decoration: none;
+    transition: background var(--transition), color var(--transition);
+}
+
+.dropdown-menu a:hover,
+.dropdown-menu a.active {
+    color: var(--accent);
+    background: #F1F5F9;
+}
+
+.header-cta {
+    flex: 0 0 auto;
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+    padding: 10px 16px;
+    border: 1px solid rgba(255, 255, 255, .24);
+    border-radius: 5px;
+    color: #fff;
+    font-family: var(--font-mono);
+    font-size: .64rem;
+    font-weight: 500;
+    letter-spacing: .06em;
+    text-transform: uppercase;
+    transition: background var(--transition), border-color var(--transition), transform var(--transition);
+}
+
+.header-cta:hover {
+    background: rgba(44, 122, 200, .18);
+    border-color: rgba(117, 168, 207, .48);
+    transform: translateY(-1px);
+}
+
+.header-cta span {
+    font-size: 13px;
+}
+
+.mobile-menu-btn {
+    display: none;
+    width: 42px;
+    height: 42px;
+    margin-left: auto;
+    padding: 10px;
+    border: 1px solid rgba(255, 255, 255, .16);
+    border-radius: 6px;
+    background: transparent;
+    color: #fff;
+    cursor: pointer;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.mobile-menu-btn span {
+    display: block;
+    width: 18px;
+    height: 1px;
+    background: currentColor;
+    transition: transform var(--transition), opacity var(--transition);
+}
+
+.mobile-menu-btn.active span:nth-child(1) {
+    transform: translateY(6px) rotate(45deg);
+}
+
+.mobile-menu-btn.active span:nth-child(2) {
+    opacity: 0;
+}
+
+.mobile-menu-btn.active span:nth-child(3) {
+    transform: translateY(-6px) rotate(-45deg);
+}
+
+
+/* Home hero uses the same navigation styling without a separate header bar. */
+
+.hero {
+    position: relative;
+}
+
+.hero > .hero-top {
+    position: absolute;
+    inset: 0 0 auto;
+    z-index: 1000;
+    width: min(var(--container), calc(100% - 48px));
+    min-height: var(--header-height);
+    margin-inline: auto;
+    display: flex;
+    align-items: center;
+}
+
+.hero > .hero-top .main-nav {
+    margin-left: auto;
+}
+
+.hero > .hero-top .mobile-menu-btn {
+    margin-left: 20px;
+}
+
+/* =========================================================
+   GLOBAL HERO SPACING
+   Keeps hero content visually separated from the header
+========================================================= */
+
+.hero {
+    padding-top: 90px;
+}
+
+/* Tablet */
+@media (max-width: 900px) {
+    .hero {
+        padding-top: 75px;
+    }
+}
+
+/* Mobile */
+@media (max-width: 600px) {
+    .hero {
+        padding-top: 65px;
+    }
+}
+
+
+/* =========================================================
+   FOOTER
+========================================================= */
+
+.site-footer {
+    color: rgba(255, 255, 255, .6);
+    background: var(--navy);
+}
+
+.footer-inner,
+.site-footer > .section-container {
+    width: min(var(--container), calc(100% - 48px));
+    margin-inline: auto;
+}
+
+.footer-inner {
+    display: grid;
+    grid-template-columns: 1.4fr repeat(3, 1fr);
+    gap: 45px;
+    padding: 70px 0 60px;
+}
+
+.site-footer > .section-container:not(.footer-inner) {
+    padding-top: 70px;
+    padding-bottom: 60px;
+}
+
+.footer-main {
+    display: grid;
+    grid-template-columns: 1.4fr repeat(3, 1fr);
+    gap: 45px;
+    padding: 70px 0 60px;
+}
+
+.footer-brand {
+    max-width: 320px;
+}
+
+.footer-logo {
+    display: inline-flex;
+    align-items: center;
+    gap: 9px;
+    text-decoration: none;
+}
+
+.footer-logo-img {
+    display: block;
+    height: 36px;
+    width: auto;
+}
+
+.footer-logo-mark {
+    font-family: var(--font-brand);
+    font-size: 1.12rem;
+    font-weight: 700;
+    letter-spacing: .16em;
+    background: linear-gradient(90deg, #D4AF5A, #2C7AC8 48%, #5CC7B0);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.footer-brand .brand-name {
+    color: #fff;
+}
+
+.footer-brand p {
+    margin: 20px 0 0;
+    color: rgba(255, 255, 255, .36);
+    font-size: .83rem;
+    line-height: 1.6;
+}
+
+.footer-links {
+    display: contents;
+}
+
+.footer-column {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+}
+
+.footer-column h4,
+.footer-heading {
+    display: block;
+    margin: 0 0 9px;
+    color: rgba(255, 255, 255, .28);
+    font-family: var(--font-mono);
+    font-size: .59rem;
+    font-weight: 500;
+    line-height: 1.3;
+    letter-spacing: .11em;
+}
+
+.footer-column a {
+    color: rgba(255, 255, 255, .53);
+    font-size: .78rem;
+    line-height: 1.45;
+    text-decoration: none;
+    transition: color var(--transition);
+}
+
+.footer-column a:hover {
+    color: #fff;
+}
+
+.footer-bottom {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 25px;
+    padding: 20px 0 24px;
+    border-top: 1px solid rgba(255, 255, 255, .08);
+    color: rgba(255, 255, 255, .25);
+    font-family: var(--font-mono);
+    font-size: .56rem;
+    line-height: 1.5;
+    letter-spacing: .04em;
+}
+
+.footer-tagline {
+    white-space: nowrap;
+}
+
+
+/* =========================================================
+   RESPONSIVE SITE CHROME
+========================================================= */
+
+@media (max-width: 1100px) {
+    .footer-inner,
+    .footer-main {
+        grid-template-columns: 1.5fr 1fr 1fr;
+    }
+
+    .footer-inner .footer-column:last-child,
+    .footer-main .footer-column:last-child {
+        grid-column: 2;
+    }
+}
+
+@media (max-width: 900px) {
+    .header-inner {
+        width: min(var(--container), calc(100% - 36px));
+    }
+
+    .main-nav,
+    .hero-nav {
+        gap: 18px;
+    }
+
+    .header-cta {
+        padding: 9px 12px;
+    }
+}
+
+@media (max-width: 800px) {
+    .header-inner {
+        min-height: 70px;
+    }
+
+    .main-nav,
+    .hero-nav {
+        display: none;
+        position: absolute;
+        top: calc(100% - 1px);
+        left: 18px;
+        right: 18px;
+        margin: 0;
+        padding: 10px;
+        flex-direction: column;
+        align-items: stretch;
+        gap: 2px;
+        background: rgba(9, 18, 28, .99);
+        border: 1px solid rgba(255, 255, 255, .09);
+        border-top: 0;
+        border-radius: 0 0 10px 10px;
+        box-shadow: 0 18px 40px rgba(0, 0, 0, .22);
+    }
+
+    .main-nav.mobile-open,
+    .hero-nav.mobile-open {
+        display: flex;
+    }
+
+    .main-nav > a,
+    .main-nav .nav-link,
+    .hero-nav > a,
+    .hero-nav .nav-link {
+        width: 100%;
+        justify-content: space-between;
+        padding: 13px 12px;
+        font-size: .68rem;
+    }
+
+    .nav-dropdown {
+        width: 100%;
+    }
+
+    .dropdown-menu {
+        position: relative;
+        min-width: 0;
+        width: 100%;
+        margin: 0 0 3px;
+        padding: 4px;
+        transform: none;
+        opacity: 1;
+        visibility: visible;
+        pointer-events: auto;
+        display: none;
+        border: 0;
+        border-radius: 7px;
+        box-shadow: none;
+        background: rgba(255, 255, 255, .05);
+    }
+
+    .nav-dropdown.open > .dropdown-menu {
+        display: block;
+    }
+
+    .dropdown-menu a {
+        color: rgba(255, 255, 255, .72);
+        padding: 10px 12px 10px 24px;
+        white-space: normal;
+    }
+
+    .dropdown-menu a:hover,
+    .dropdown-menu a.active {
+        color: #fff;
+        background: rgba(255, 255, 255, .08);
+    }
+
+    .header-cta {
+        display: none;
+    }
+
+    .mobile-menu-btn {
+        display: inline-flex;
+    }
+
+    .hero > .hero-top {
+        width: calc(100% - 36px);
+        min-height: 70px;
+    }
+
+    .hero > .hero-top .mobile-menu-btn {
+        margin-left: 12px;
+    }
+
+    .footer-inner,
+    .footer-main {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .footer-brand {
+        grid-column: 1 / -1;
+    }
+
+    .footer-bottom {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .footer-tagline {
+        white-space: normal;
+    }
+}
+
+@media (max-width: 560px) {
+    .section-container,
+    .footer-inner,
+    .site-footer > .section-container,
+    .header-inner,
+    .hero > .hero-top {
+        width: calc(100% - 28px);
+    }
+
+    .footer-inner,
+    .footer-main {
+        grid-template-columns: 1fr;
+        gap: 30px;
+    }
+
+    .footer-brand {
+        grid-column: auto;
+    }
+
+    .site-footer > .section-container:not(.footer-inner) {
+        padding-top: 50px;
+        padding-bottom: 20px;
+    }
+
+    .footer-main {
+        padding: 50px 0 40px;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    html {
+        scroll-behavior: auto;
+    }
+
+    *,
+    *::before {
+        transition: none !important;
+    }
+}
+
+/* =========================================================
+   PRISM — GLOBAL READABILITY OVERRIDE
+   ---------------------------------------------------------
+   Purpose:
+   • Improve readability of very-small supporting text
+   • Preserve existing layout, spacing and visual hierarchy
+   • Override page-specific typography where necessary
+   • Do NOT affect normal body text or headings
+========================================================= */
+
+
+/* ---------------------------------------------------------
+   DESKTOP / TABLET
+--------------------------------------------------------- */
+
+@media (min-width: 601px) {
+
+    /* Small metadata / labels / tags */
+    .timeline-meta span,
+    .timeline-action span,
+    .field-case-status,
+    .field-visual-header,
+    .environment-footer span,
+    .language-panel-top,
+    .language-panel-bottom,
+    .network-caption,
+    .network-footer {
+        font-size: 10px !important;
+    }
+
+    /* Small visualisation labels */
+    .map-label,
+    .card-type,
+    .visual-caption,
+    .language-core-label,
+    .multilingual-stat-label,
+    .network-node {
+        font-size: 10px !important;
+    }
+
+    /* Small supporting labels */
+    .signal-label,
+    .signal-date,
+    .signal-foot span,
+    .signal-point span,
+    .signal-findings span,
+    .trend-sub,
+    .trend-tick,
+    .takeaway-chain span,
+    .takeaway-chain strong {
+        font-size: 10px !important;
+    }
+}
+
+
+/* ---------------------------------------------------------
+   MOBILE
+--------------------------------------------------------- */
+
+@media (max-width: 600px) {
+
+    /* Small metadata / labels / tags */
+    .timeline-meta span,
+    .timeline-action span,
+    .field-case-status,
+    .field-visual-header,
+    .environment-footer span,
+    .language-panel-top,
+    .language-panel-bottom,
+    .network-caption,
+    .network-footer {
+        font-size: 9px !important;
+    }
+
+    /* Small visualisation labels */
+    .map-label,
+    .card-type,
+    .visual-caption,
+    .language-core-label,
+    .multilingual-stat-label,
+    .network-node {
+        font-size: 9px !important;
+    }
+
+    /* Small supporting labels */
+    .signal-label,
+    .signal-date,
+    .signal-foot span,
+    .signal-point span,
+    .signal-findings span,
+    .trend-sub,
+    .trend-tick,
+    .takeaway-chain span,
+    .takeaway-chain strong {
+        font-size: 9px !important;
+    }
+}
