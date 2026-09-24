@@ -227,7 +227,6 @@ a {
     transition: opacity var(--transition), transform var(--transition), visibility var(--transition);
 }
 
-.nav-dropdown:hover > .dropdown-menu,
 .nav-dropdown:focus-within > .dropdown-menu,
 .nav-dropdown.open > .dropdown-menu {
     opacity: 1;
